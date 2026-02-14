@@ -13,6 +13,10 @@ public class Node
     {
         // TODO Start Problem 1
 
+        // If the value already exists, do nothing
+        if (value == Data)
+            return;
+
         if (value < Data)
         {
             // Insert to the left
@@ -34,12 +38,37 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
-        return false;
+
+        // If we found the value, return true
+        if (value == Data)
+            return true;
+
+        // If the value is less than current data, search left
+        if (value < Data)
+        {
+            if (Left is null)
+                return false;
+            return Left.Contains(value);
+        }
+
+        // If the value is greater than current data, search right
+        else
+        {
+            if (Right is null)
+                return false;
+            return Right.Contains(value);
+        }
     }
 
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+
+        // Get the height of left and right subtrees
+        int leftHeight = (Left is null) ? 0 : Left.GetHeight();
+        int rightHeight = (Right is null) ? 0 : Right.GetHeight();
+
+        // Return 1 + the maximum of the two heights
+        return 1 + Math.Max(leftHeight, rightHeight);
     }
 }
